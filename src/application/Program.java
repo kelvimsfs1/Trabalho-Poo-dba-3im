@@ -1,5 +1,6 @@
 package application;
 
+import java.awt.List;
 import java.util.Date;
 
 import modelo.dao.DaoFactory;
@@ -21,8 +22,17 @@ public class Program {
 		System.out.println(vendedor);
 		
 		System.out.println("\n=== Teste 2: Vendedor EncontradoPorDepartamento ===");
-		List<Vendedor> list = vendedordao.findbyDepartament(departamento);
-
+		Departamento departamento = new Departamento(2, null);
+		List<Vendedor> list = vendedorDao.findByDepartamento(departamento);
+		for (Vendedor obj :list) {
+			System.out.println(obj); 
+		}
+        
+		System.out.println("\n=== Teste 2: Vendedor EncontradoPorTudo ===");
+		List<Vendedor> list = vendedorDao.findAll();
+		for (Vendedor obj :list) {
+			System.out.println(obj);  
+		}
 
 	}	
  
