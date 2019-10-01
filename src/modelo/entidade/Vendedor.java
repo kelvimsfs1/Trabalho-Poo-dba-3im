@@ -105,6 +105,6 @@ public class Vendedor implements Serializable {
 	public String toString() {
 		return "Vendedor [id=" + id + ", Nome=" + Nome + ", email=" + email + ", Aniversario=" + Aniversario
 				+ ", SalarioBase=" + SalarioBase + ", departamento=" + departamento + "]";
-	}
+	}	
     
 }

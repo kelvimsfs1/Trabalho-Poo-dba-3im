@@ -15,6 +15,9 @@ public class Program {
 		Vendedor vendedor = new Vendedor(21, "bob", "bob@gmail.com", new Date(), 3000.0, obj);
 		
 		VendedorDao vendedorDao = DaoFactory.createVendedorDao();
+		VendedorDao vendedor = VendedorDao.findBYId(3);
+		
+		
 		
 		System.out.println(vendedor);
 
