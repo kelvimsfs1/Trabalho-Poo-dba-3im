@@ -11,15 +11,18 @@ public class Program {
 
 	public static void main(String[] args) {
 
-		Departamento obj = new Departamento(1, "books");
-		Vendedor vendedor = new Vendedor(21, "bob", "bob@gmail.com", new Date(), 3000.0, obj);
+		//Departamento obj = new Departamento(1, "books");
+		//Vendedor vendedor = new Vendedor(21, "bob", "bob@gmail.com", new Date(), 3000.0, obj);
 		
 		VendedorDao vendedorDao = DaoFactory.createVendedorDao();
-		VendedorDao vendedor = VendedorDao.findBYId(3);
 		
-		
-		
+		System.out.println("=== Teste 1: Vendedor EncontradoPorId ===");
+		Vendedor vendedor = VendedorDao.findById(3);
 		System.out.println(vendedor);
+		
+		System.out.println("\n=== Teste 2: Vendedor EncontradoPorDepartamento ===");
+		List<Vendedor> list = vendedordao.findbyDepartament(departamento);
+
 
 	}	
  
