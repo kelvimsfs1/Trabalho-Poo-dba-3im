@@ -45,7 +45,7 @@ public class VendedorDaoJDBC implements VendedorDao{
 		st.setInt(5, obj.getDepartamento().getId());
 
 
-       int rowsaffected - st.executeUpdate();
+       int rowsAffected = st.executeUpdate();
        
        if (rowsAffected > 0) {
     	   ResultSet rs = st.getGeneratedKeys();
@@ -67,12 +67,36 @@ public class VendedorDaoJDBC implements VendedorDao{
 			DB.closeStatement(st);
 		}
 	}
+	
 
 	@Override
-	public void update(Vendedor obj) {
-		// TODO Auto-generated method stub
-		
+	public void update (Vendedor obj) {
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"UPDATE Vendedor "
+					+ "SET Nome = ?, Email = ?, Aniversario = ?, SalarioBase = ?, DepartamentoId = ?" 
+					+ "WHERE Id = ?" );	
+			
+		st.setString(1, obj.getNome());
+		st.setString(2, obj.getEmail());
+		st.setDate(3, new java.sql.Date(obj.getAniversario().getTime()));
+		st.setDouble(4, obj.getSalarioBase());
+		st.setInt(5, obj.getDepartamento().getId());
+		st.setInt(6, obj.getId());
+
+        st.executeUpdate();
+       
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
 	}
+		
+	
 
 	@Override
 	public void deletebyId(Integer id) {
