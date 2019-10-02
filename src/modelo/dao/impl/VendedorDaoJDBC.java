@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.mysql.cj.xdevapi.Statement;
+
 import db.DB;
 import db.DbException;
 import modelo.dao.VendedorDao;
@@ -27,8 +29,43 @@ public class VendedorDaoJDBC implements VendedorDao{
 
 	@Override
 	public void insert(Vendedor obj) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"INSERT INTO vendedor "
+					+ "(Nome, Email, Aniversario, SalarioBase, DepartamentoId)"
+					+ " VALUES "
+					+ " (?, ?, ?, ?, ?)",
+					Statement.RETURN_GENERATED_KEYS);	
+			
+		st.setString(1, obj.getNome());
+		st.setString(2, obj.getEmail());
+		st.setDate(3, new java.sql.Date(obj.getAniversario().getTime()));
+		st.setDouble(4, obj.getSalarioBase());
+		st.setInt(5, obj.getDepartamento().getId());
+
+
+       int rowsaffected - st.executeUpdate();
+       
+       if (rowsAffected > 0) {
+    	   ResultSet rs = st.getGeneratedKeys();
+    	   if (rs.next()) {
+    		   int id = rs.getInt(1);
+    		   obj.setId(id);
+    	   }
+    	   DB.closeResultSet(rs);
+       }
+       else {
+    	   throw new DbException("Erro Inesperado");
+       }
 		
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override

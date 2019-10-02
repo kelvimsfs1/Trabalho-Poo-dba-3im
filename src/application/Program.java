@@ -34,6 +34,10 @@ public class Program {
 			System.out.println(obj);  
 		}
 
-	}	
+		System.out.println("\n=== Teste 4: Vendedor Inserindo ===");
+	    Vendedor newVendedor = new Vendedor(null, "joao", "joao@gmail.com",new Date(),4500.0,departamento);
+	    vendedorDao.insert(newVendedor);
+		System.out.println("Inseriu");  
+	  }
  
-}
+} 
