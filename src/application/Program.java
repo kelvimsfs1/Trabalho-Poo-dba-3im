@@ -48,6 +48,12 @@ public class Program {
 	    System.out.println("Atualização completa");
 	    
 	    
-
+	    
+	
+		System.out.println("\n=== Teste 7: Vendedor Deletando ===");
+	    vendedorDao.deletebyId(1);
+	    System.out.println("Id Deletado");
+	    
+       }
  
 } 
